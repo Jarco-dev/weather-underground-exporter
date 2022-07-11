@@ -26,7 +26,7 @@ class MetricsManager {
             try {
                 if (!this.lastRequestTime || Date.now() - this.lastRequestTime > 60000) {
                     this.lastRequestTime = Date.now();
-                    const res2 = await fetch(`${this.apiUrl}?format=json&units=m&stationId=${this.stationId}&apiKey=${this.apiKey}`);
+                    const res2 = await fetch(`${this.apiUrl}?numericPrecision=decimal&format=json&units=m&stationId=${this.stationId}&apiKey=${this.apiKey}`);
                     if (!res2.ok) console.warn("Unable to retrieve data from weather underground api", res);
                     this.data = (await res2.json()).observations[0];
                 }
