@@ -7,15 +7,16 @@ class MetricsManager {
         this.port = process.env.PORT;
         this.stationId = process.env.STATION_ID;
         this.apiKey = process.env.API_KEY;
+        this.apiUrl = "https://api.weather.com/v2/pws/observations/current";
+        this.count = 0;
+        this.lastRequestTime = undefined;
+        this.data = {};
 
         this.promClient = require("prom-client");
-        this.data = {};
         this.metrics = {};
         this.createMetrics();
 
         this.app = express();
-
-        this.apiUrl = "https://api.weather.com/v2/pws/observations/current";
 
         this.start();
     }
@@ -23,14 +24,15 @@ class MetricsManager {
     start() {
         this.app.get("/metrics", async (req, res) => {
             try {
-                const res2 = await fetch(`${this.apiUrl}?format=json&units=m&stationId=${this.stationId}&apiKey=${this.apiKey}`);
-                if (!res2.ok) console.warn("Unable to retrieve data from weather underground api", res);
-                this.data = (await res2.json()).observations[0];
+                if (!this.lastRequestTime || Date.now() - this.lastRequestTime > 60000) {
+                    this.lastRequestTime = Date.now();
+                    const res2 = await fetch(`${this.apiUrl}?format=json&units=m&stationId=${this.stationId}&apiKey=${this.apiKey}`);
+                    if (!res2.ok) console.warn("Unable to retrieve data from weather underground api", res);
+                    this.data = (await res2.json()).observations[0];
+                }
 
                 await res.set("Content-Type", this.promClient.register.contentType);
                 await res.send(await this.promClient.register.metrics());
-
-                this.data = {};
             } catch(err) {
                 console.log("Error while handling metrics request", err);
                 res.status(500).send("A internal server error occurred");
