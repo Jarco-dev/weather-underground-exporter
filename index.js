@@ -47,7 +47,7 @@ class MetricsManager {
             name: "wu_solar_radiation",
             help: "Watt per square meter W/m2",
             collect: () => {
-                if (this.data.solarRadiation) {
+                if (this.data.solarRadiation !== null) {
                     this.metrics.solarRadiation.set(this.data.solarRadiation);
                 }
             }
@@ -57,7 +57,7 @@ class MetricsManager {
             name: "wu_uv_index",
             help: "UV index",
             collect: () => {
-                if (this.data.uv) {
+                if (this.data.uv !== null) {
                     this.metrics.uvIndex.set(this.data.uv);
                 }
             }
@@ -67,7 +67,7 @@ class MetricsManager {
             name: "wu_wind_direction",
             help: "Wind direction in degrees",
             collect: () => {
-                if (this.data.winddir) {
+                if (this.data.winddir !== null) {
                     this.metrics.windDirection.set(this.data.winddir);
                 }
             }
@@ -77,7 +77,7 @@ class MetricsManager {
             name: "wu_humidity",
             help: "Humidity as percentage",
             collect: () => {
-                if (this.data.humidity) {
+                if (this.data.humidity !== null) {
                     this.metrics.humidity.set(this.data.humidity);
                 }
             }
@@ -87,7 +87,7 @@ class MetricsManager {
             name: "wu_temperature",
             help: "temperature in degrees celsius",
             collect: () => {
-                if (this.data.metric.temp) {
+                if (this.data.metric.temp !== null) {
                     this.metrics.temperature.set(this.data.metric.temp);
                 }
             }
@@ -97,7 +97,7 @@ class MetricsManager {
             name: "wu_heat_index",
             help: "temperature as it feels in degrees celsius",
             collect: () => {
-                if (this.data.metric.heatIndex) {
+                if (this.data.metric.heatIndex !== null) {
                     this.metrics.heatIndex.set(this.data.metric.heatIndex);
                 }
             }
@@ -107,7 +107,7 @@ class MetricsManager {
             name: "wu_dewpoint",
             help: "dewpoint in degrees celsius",
             collect: () => {
-                if (this.data.metric.dewpt) {
+                if (this.data.metric.dewpt !== null) {
                     this.metrics.dewpoint.set(this.data.metric.dewpt);
                 }
             }
@@ -117,7 +117,7 @@ class MetricsManager {
             name: "wu_windChill",
             help: "wind chill in degrees celsius",
             collect: () => {
-                if (this.data.metric.windChill) {
+                if (this.data.metric.windChill !== null) {
                     this.metrics.windChill.set(this.data.metric.windChill);
                 }
             }
@@ -127,7 +127,7 @@ class MetricsManager {
             name: "wu_wind_speed",
             help: "wind speed in km/h",
             collect: () => {
-                if (this.data.metric.windSpeed) {
+                if (this.data.metric.windSpeed !== null) {
                     this.metrics.windSpeed.set(this.data.metric.windSpeed);
                 }
             }
@@ -137,7 +137,7 @@ class MetricsManager {
             name: "wu_wind_gust",
             help: "peak wind speed in km/h",
             collect: () => {
-                if (this.data.metric.windGust) {
+                if (this.data.metric.windGust !== null) {
                     this.metrics.windGust.set(this.data.metric.windGust);
                 }
             }
@@ -147,7 +147,7 @@ class MetricsManager {
             name: "wu_pressure",
             help: "Pressure in hPa",
             collect: () => {
-                if (this.data.metric.pressure) {
+                if (this.data.metric.pressure !== null) {
                     this.metrics.pressure.set(this.data.metric.pressure);
                 }
             }
@@ -157,7 +157,7 @@ class MetricsManager {
             name: "wu_precipitation_rate",
             help: "how much rain would fall if the precipitation intensity did not change for one hour in mm",
             collect: () => {
-                if (this.data.metric.precipRate) {
+                if (this.data.metric.precipRate !== null) {
                     this.metrics.precipitationRate.set(this.data.metric.precipRate);
                 }
             }
@@ -167,7 +167,7 @@ class MetricsManager {
             name: "wu_precipitation_total",
             help: "accumulated precipitation for today from midnight to present in mm",
             collect: () => {
-                if (this.data.metric.precipTotal) {
+                if (this.data.metric.precipTotal != null) {
                     this.metrics.precipitationTotal.set(this.data.metric.precipTotal);
                 }
             }
